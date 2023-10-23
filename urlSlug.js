@@ -11,16 +11,32 @@ The output should not have any spaces
  */
 
 
-let regex = /\s+/
+let regex = /\s+/;
 function urlSlug(title) {
   
   let array = title.split(" ");
-  if (/^\s+/.test(title)) {
-    array.shift();
-    title = array.join(" ");
+  if (/^\s+/.test(title)) { // if there is a empty space at beginging then proceed
+    array.shift(); // remove the empty space at the begining
+    title = array.join(" "); // join the elements of the splitted array with spaces
   }
   
-  return (title.toLowerCase().split(regex)).join("-");
+  return (title.toLowerCase().split(regex)).join("-"); // then again splits with the regex and join with dashes
+
+  // a lot of unnecessary works
+  // better solution is:
+
+  /*
+  function urlSlug(title) {
+
+  let array = title.split(/^\s|\s+/)//.join("-").toLowerCase();
+  if (array[0] === "") {
+    array.shift();
+  }
+  return array.join("-").toLowerCase();
+
+  }
+  console.log(urlSlug(" A Mind  Needs Books Like A Sword Needs A Whetstone"));
+  */
 
 }
 
